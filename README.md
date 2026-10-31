@@ -37,12 +37,18 @@ Open project folder and run these commands:
 mkdir ./data
 initdb -D ./data
 
-# Create lock file directory for postgres server
+# Create lock file directory for postgres server (just in RAM)
 sudo mkdir /run/postgresql
 sudo chown -R $USER:$USER /run/postgresql
 
 # Run postgres server
 pg_ctl -D ./data -l postgres.log start
+
+# Create database
+createdb fastpost
+
+# Optional: You can inspect database by this interactive command:
+psql -d fastpost
 
 # Run the project
 uv run fastapi dev
