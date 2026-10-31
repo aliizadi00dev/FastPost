@@ -1,4 +1,4 @@
-# FastLibra 📚
+# FastPost 📚
 
 A simple book management REST API built with **FastAPI** and **PostgreSQL**.
 
