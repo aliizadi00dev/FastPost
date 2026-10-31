@@ -1,0 +1,11 @@
+title,author,year,genre,pages,rating
+The Pragmatic Programmer,Andrew Hunt and David Thomas,1999,Software Engineering,352,4.7
+Clean Code,Robert C. Martin,2008,Software Engineering,464,4.4
+The Mythical Man-Month,Frederick P. Brooks Jr.,1975,Software Engineering,322,4.3
+Structure and Interpretation of Computer Programs,Harold Abelson and Gerald Jay Sussman,1985,Computer Science,657,4.5
+Introduction to Algorithms,Thomas H. Cormen,2009,Algorithms,1312,4.4
+Code Complete,Steve McConnell,2004,Software Engineering,960,4.5
+Design Patterns,Erich Gamma and Richard Helm and Ralph Johnson and John Vlissides,1994,Software Engineering,395,4.3
+The C Programming Language,Brian W. Kernighan and Dennis M. Ritchie,1988,Programming Languages,272,4.6
+Artificial Intelligence: A Modern Approach,Stuart Russell and Peter Norvig,2020,Artificial Intelligence,1115,4.4
+You Don't Know JS,Kyle Simpson,2015,Web Development,278,4.2
