@@ -1,26 +1,37 @@
 from fastapi import FastAPI, HTTPException
-from sqlmodel import SQLModel
-from typing import Optional
+from sqlmodel import SQLModel, Field, create_engine
+
 
 app = FastAPI()
 
 
-class Book(SQLModel):
+# database models
+class Book(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
     title: str
     author: str
-    year: int
-    genre: str
-    pages: int
-    rating: float
+    year: int | None = None
+    genre: str | None = None
+    pages: int | None = None
+    rating: float | None = None
 
 
 class BookUpdate(SQLModel):
-    title: Optional[str] = None
-    author: Optional[str] = None
-    year: Optional[int] = None
-    genre: Optional[str] = None
-    pages: Optional[int] = None
-    rating: Optional[float] = None
+    title: str | None = None
+    author: str | None = None
+    year: int | None = None
+    genre: str | None = None
+    pages: int | None = None
+    rating: float | None = None
+
+
+# init database connection:
+DB_URL = "127.0.0.1:5432"
+DB_DATABASE_NAME = "fastpost"
+
+engine = create_engine(f"postgres:///{DB_URL}/{DB_DATABASE_NAME}")
+
+SQLModel.metadata.create_all(engine)
 
 
 @app.get("/")
