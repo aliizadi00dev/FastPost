@@ -1,2 +1,3 @@
 /data
 postgres.log
+__pycache__/

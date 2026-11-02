@@ -19,6 +19,8 @@ A simple book management REST API built with **FastAPI** and **PostgreSQL**.
 - Python 3.10+
 - FastAPI
 - PostgreSQL
+- SQLModel
+- psycopg
 
 Install dependencies:
 
@@ -39,10 +41,11 @@ initdb -D ./data
 
 # Create lock file directory for postgres server (just in RAM)
 sudo mkdir /run/postgresql
-sudo chown -R $USER:$USER /run/postgresql
+sudo chown -R postgres:postgres /run/postgresql
+sudo chmod 777 /run/postgresql
 
 # Run postgres server
-pg_ctl -D ./data -l postgres.log start
+pg_ctl -U postgres -D ./data -l postgres.log start
 
 # Create database
 createdb fastpost
