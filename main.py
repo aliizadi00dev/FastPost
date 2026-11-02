@@ -1,14 +1,20 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from .db import Book, engine, create_db_and_tables, BookCreate
 from sqlmodel import Session
 
 
-app = FastAPI()
-
-
-@app.on_event("startup")
-def on_startup():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # on startup
     create_db_and_tables()
+
+    yield
+    # on shutdown
+    print("FastPost is shutting down!!")
+
+
+app = FastAPI(lifespan=lifespan)
 
 
 @app.get("/")
@@ -16,23 +22,42 @@ def root():
     return "Hello to FastPost project"
 
 
-# @app.get("/books")
-# def get_books():
-#     return
+@app.get("/books")
+def get_books():
+    return
+
+
+# @app.post("/books")
+# def add_book(book: BookCreate):
+#     with Session(engine) as session:
+#         db_book = Book.model_validate(book)
+#
+#         session.add(db_book)
+#
+#         session.commit()
+#
+#         session.refresh(db_book)
+#
+#     return db_book
 
 
 @app.post("/books")
-def add_book(book: BookCreate):
-    with Session(engine) as session:
-        db_book = Book.model_validate(book)
+def add_book(book: Book):
+    db_book = book
 
+    print("Before session")
+    print(db_book)
+
+    with Session(engine) as session:
         session.add(db_book)
+
+        print("After session")
+        print(db_book)
 
         session.commit()
 
-        session.refresh(db_book)
-
-    return db_book
+        print("After commit")
+        print(db_book)
 
 
 #
