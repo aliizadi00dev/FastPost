@@ -12,6 +12,15 @@ class Book(SQLModel, table=True):
     rating: float | None = None
 
 
+class BookCreate(SQLModel):
+    title: str
+    author: str
+    year: int | None = None
+    genre: str | None = None
+    pages: int | None = None
+    rating: float | None = None
+
+
 class BookUpdate(SQLModel):
     title: str | None = None
     author: str | None = None
@@ -22,7 +31,7 @@ class BookUpdate(SQLModel):
 
 
 # init database connection:
-DB_USER = "postgres"
+DB_USER = "yamahdi"
 DB_PASSWORD = ""
 DB_HOST = "127.0.0.1"
 DB_PORT = 5432

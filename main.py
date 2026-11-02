@@ -1,12 +1,40 @@
 from fastapi import FastAPI, HTTPException
+from .db import Book, engine, create_db_and_tables, BookCreate
+from sqlmodel import Session
 
 
 app = FastAPI()
 
 
-# @app.get("/")
-# def root():
-#     return "Hello to FastLibra project"
+@app.on_event("startup")
+def on_startup():
+    create_db_and_tables()
+
+
+@app.get("/")
+def root():
+    return "Hello to FastPost project"
+
+
+# @app.get("/books")
+# def get_books():
+#     return
+
+
+@app.post("/books")
+def add_book(book: BookCreate):
+    with Session(engine) as session:
+        db_book = Book.model_validate(book)
+
+        session.add(db_book)
+
+        session.commit()
+
+        session.refresh(db_book)
+
+    return db_book
+
+
 #
 #
 # # Retrieve books
