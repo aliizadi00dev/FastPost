@@ -1,3 +1,7 @@
 /data
 postgres.log
 __pycache__/
+
+.env
+.env.local
+.env.prod

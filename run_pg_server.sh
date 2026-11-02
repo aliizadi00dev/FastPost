@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-if [ -f  /run/postgresql ]; then
+if [[ ! -d  "/run/postgresql" ]]; then
     sudo mkdir /run/postgresql
     sudo chown $USER:$USER /run/postgresql
 fi

@@ -1,5 +1,21 @@
 from sqlmodel import SQLModel, Field, create_engine
 from sqlalchemy import Column, Integer, Identity
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Settings(BaseSettings):
+    # env vars and their types
+    db_user: str | None = None
+    db_passwd: str = ""
+    db_host: str = "127.0.0.1"
+    db_port: int = 5432
+    db_database_name: str = "fastpost"
+
+    # Tell Pydantic to read from a .evn file
+    model_config = SettingsConfigDict(env_file=".env")
+
+
+settings = Settings()
 
 
 # database models
@@ -34,14 +50,15 @@ class BookUpdate(SQLModel):
 
 
 # init database connection:
-DB_USER = "yamahdi"
-DB_PASSWORD = ""
-DB_HOST = "127.0.0.1"
-DB_PORT = 5432
-DB_DATABASE_NAME = "fastpost"
+DB_USER = settings.db_user
+DB_PASSWORD = settings.db_passwd
+DB_HOST = settings.db_host
+DB_PORT = settings.db_port
+DB_DATABASE_NAME = settings.db_database_name
 
 engine = create_engine(
-    f"postgresql+psycopg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_DATABASE_NAME}",
+    f"postgresql+psycopg://{DB_USER}:{DB_PASSWORD}@{
+        DB_HOST}:{DB_PORT}/{DB_DATABASE_NAME}",
     echo=True,
 )
 
