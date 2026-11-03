@@ -101,6 +101,5 @@ def delete_book(book_id: int):
         book_title = book.title
         session.delete(book)
         session.commit()
-        session.refresh(book)
 
     return {"message": f"Deleted '{book_title}'", "book": book}
